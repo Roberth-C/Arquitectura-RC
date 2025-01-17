@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://www.example.org/library"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             name="LibraryService"
+             targetNamespace="http://www.example.org/library">
+    <types>
+        <xsd:schema targetNamespace="http://www.example.org/library">
+            <!-- Registrar Préstamo -->
+            <xsd:element name="registerLoan">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="userId" type="xsd:int"/>
+                        <xsd:element name="bookId" type="xsd:int"/>
+                        <xsd:element name="loanDate" type="xsd:date"/>
+                        <xsd:element name="dueDate" type="xsd:date"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="registerLoanResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="loanId" type="xsd:int"/>
+                        <xsd:element name="status" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- Registrar Devolución -->
+            <xsd:element name="returnLoan">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="loanId" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="returnLoanResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="status" type="xsd:string"/>
+                        <xsd:element name="fine" type="xsd:decimal"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- Préstamos Activos -->
+            <xsd:element name="getActiveLoans">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="startDate" type="xsd:date" minOccurs="0"/>
+                        <xsd:element name="endDate" type="xsd:date" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getActiveLoansResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="loans" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- Historial del Usuario -->
+            <xsd:element name="getUserHistory">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="userId" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="getUserHistoryResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="history" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- Registrar Usuario -->
+            <xsd:element name="registerUser">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="username" type="xsd:string"/>
+                        <xsd:element name="idInstitucional" type="xsd:string"/>
+                        <xsd:element name="password" type="xsd:string"/>
+                        <xsd:element name="role" type="xsd:int"/>
+                        <xsd:element name="status" type="xsd:boolean"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="registerUserResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="userId" type="xsd:int"/>
+                        <xsd:element name="status" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- Suspender Usuario -->
+            <xsd:element name="suspendUser">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="userId" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="suspendUserResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="status" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="registerLoanRequest">
+        <part name="parameters" element="tns:registerLoan"/>
+    </message>
+    <message name="registerLoanResponse">
+        <part name="parameters" element="tns:registerLoanResponse"/>
+    </message>
+    <message name="returnLoanRequest">
+        <part name="parameters" element="tns:returnLoan"/>
+    </message>
+    <message name="returnLoanResponse">
+        <part name="parameters" element="tns:returnLoanResponse"/>
+    </message>
+    <message name="getActiveLoansRequest">
+        <part name="parameters" element="tns:getActiveLoans"/>
+    </message>
+    <message name="getActiveLoansResponse">
+        <part name="parameters" element="tns:getActiveLoansResponse"/>
+    </message>
+    <message name="getUserHistoryRequest">
+        <part name="parameters" element="tns:getUserHistory"/>
+    </message>
+    <message name="getUserHistoryResponse">
+        <part name="parameters" element="tns:getUserHistoryResponse"/>
+    </message>
+    <message name="registerUserRequest">
+        <part name="parameters" element="tns:registerUser"/>
+    </message>
+    <message name="registerUserResponse">
+        <part name="parameters" element="tns:registerUserResponse"/>
+    </message>
+    <message name="suspendUserRequest">
+        <part name="parameters" element="tns:suspendUser"/>
+    </message>
+    <message name="suspendUserResponse">
+        <part name="parameters" element="tns:suspendUserResponse"/>
+    </message>
+
+    <portType name="LibraryServicePortType">
+        <operation name="registerLoan">
+            <input message="tns:registerLoanRequest"/>
+            <output message="tns:registerLoanResponse"/>
+        </operation>
+        <operation name="returnLoan">
+            <input message="tns:returnLoanRequest"/>
+            <output message="tns:returnLoanResponse"/>
+        </operation>
+        <operation name="getActiveLoans">
+            <input message="tns:getActiveLoansRequest"/>
+            <output message="tns:getActiveLoansResponse"/>
+        </operation>
+        <operation name="getUserHistory">
+            <input message="tns:getUserHistoryRequest"/>
+            <output message="tns:getUserHistoryResponse"/>
+        </operation>
+        <operation name="registerUser">
+            <input message="tns:registerUserRequest"/>
+            <output message="tns:registerUserResponse"/>
+        </operation>
+        <operation name="suspendUser">
+            <input message="tns:suspendUserRequest"/>
+            <output message="tns:suspendUserResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="LibraryServiceBinding" type="tns:LibraryServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="registerLoan">
+            <soap:operation soapAction="registerLoan"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="returnLoan">
+            <soap:operation soapAction="returnLoan"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="getActiveLoans">
+            <soap:operation soapAction="getActiveLoans"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="getUserHistory">
+            <soap:operation soapAction="getUserHistory"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="registerUser">
+            <soap:operation soapAction="registerUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="suspendUser">
+            <soap:operation soapAction="suspendUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="LibraryService">
+        <port name="LibraryServicePort" binding="tns:LibraryServiceBinding">
+            <soap:address location="http://localhost:8000/library"/>
+        </port>
+    </service>
+</definitions>

@@ -1,0 +1,32 @@
+.student-page {
+    margin-top: 20px;
+  }
+  
+  .search-bar {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    font-size: 0.9rem;
+  }
+  
+  .row.justify-content-center {
+    justify-content: center;
+  }
+  

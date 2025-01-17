@@ -1,0 +1,126 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOAP Client</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <h1>Person Service</h1>
+    <form id="register-form">
+        <h2>Register Person</h2>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" name="apellido" required>
+        <button type="submit">Register</button>
+    </form>
+    
+    <form id="get-person-form">
+        <h2>Get Person</h2>
+        <label for="idCliente">ID Cliente:</label>
+        <input type="number" id="idCliente" name="idCliente" required>
+        <button type="submit">Get Person</button>
+    </form>
+
+    <form id="update-person-form">
+        <h2>Update Person</h2>
+        <label for="updateIdCliente">ID Cliente:</label>
+        <input type="number" id="updateIdCliente" name="updateIdCliente" required>
+        <label for="updateNombre">Nombre:</label>
+        <input type="text" id="updateNombre" name="updateNombre" required>
+        <label for="updateApellido">Apellido:</label>
+        <input type="text" id="updateApellido" name="updateApellido" required>
+        <button type="submit">Update</button>
+    </form>
+    
+    <form id="delete-person-form">
+        <h2>Delete Person</h2>
+        <label for="deleteIdCliente">ID Cliente:</label>
+        <input type="number" id="deleteIdCliente" name="deleteIdCliente" required>
+        <button type="submit">Delete</button>
+    </form>
+
+    <div id="person-details"></div>
+    <script src="script.js"></script>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOAP Client</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Person Service</h1>
+        
+        <form id="register-form" class="mb-3" class="border border-primary">
+            <h2>Registro de Personas</h2>
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" class="form-control" id="apellido" name="apellido" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="person-table-body">
+                <!-- Rows will be inserted here dynamically -->
+            </tbody>
+        </table>
+        
+        <div id="edit-person-modal" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Actualizar datos</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="edit-person-form">
+                            <input type="hidden" id="edit-idCliente">
+                            <div class="form-group">
+                                <label for="edit-nombre">Nombre:</label>
+                                <input type="text" class="form-control" id="edit-nombre" required>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="edit-apellido">Apellido:</label>
+                                <input type="text" class="form-control" id="edit-apellido" required>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+

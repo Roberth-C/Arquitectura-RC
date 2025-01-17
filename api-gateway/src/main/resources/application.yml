@@ -1,0 +1,51 @@
+server:
+  port: 8080
+  
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: 
+              - "http://localhost:3000"  # Origen del frontend
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders:
+              - "*" # Permitir todos los encabezados
+            allowCredentials: true
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - RemoveRequestHeader=Origin  # Elimina encabezado 'Origin' para evitar conflictos de CORS
+
+        - id: book-service
+          uri: lb://book-service
+          predicates:
+            - Path=/api/books/**
+          filters:
+            - RemoveRequestHeader=Origin
+
+        - id: loan-service
+          uri: lb://loan-service
+          predicates:
+            - Path=/api/loans/**
+          filters:
+            - RemoveRequestHeader=Origin
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
