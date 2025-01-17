@@ -1,0 +1,23 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://example.com/users"
+           xmlns:tns="http://example.com/users" elementFormDefault="qualified">
+
+    <xs:element name="UserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idInstitucional" type="xs:string"/>
+                <xs:element name="username" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+                <xs:element name="role" type="xs:int"/>
+                <xs:element name="status" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="UserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="message" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
